@@ -1,6 +1,0 @@
-Versi 3
-- Update benar-benar otomatis: alamat update sudah bawaan, tidak perlu diisi lagi.
-- Pemberitahuan update saat agent berjalan, ketik /update untuk memperbarui.
-- Pengumuman dari owner tampil otomatis saat dijalankan.
-- Pencarian folder dan file di semua drive, upload file dari lokasi mana pun.
-- Koneksi ke 9Router lebih tahan banting dan agent mengingat percakapan.
