@@ -1,229 +1,277 @@
 <div align="center">
 
-# 🤖 Agent Automation
+# Agent Automation
 
-**Agent AI yang bisa mengontrol PC Windows dan browser lewat perintah teks biasa.**
-Setup otomatis. Update otomatis. Model AI murah atau gratis lewat [9Router](https://github.com/decolua/9router).
+**AI agent for controlling Windows and browser applications through natural-language commands.**
 
-![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6?logo=windows&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=nodedotjs&logoColor=white)
-![Playwright](https://img.shields.io/badge/Browser-Playwright-2EAD33?logo=playwright&logoColor=white)
+Automatic setup, automatic updates, browser automation, file management, and desktop control in one agent.
+Uses [9Router](https://github.com/decolua/9router) as the LLM gateway with model fallback support.
+
+![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6?logo=windows\&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=nodedotjs\&logoColor=white)
+![Playwright](https://img.shields.io/badge/Browser-Playwright-2EAD33?logo=playwright\&logoColor=white)
 ![Router](https://img.shields.io/badge/LLM%20Gateway-9Router-FF6B35)
-![Status](https://img.shields.io/badge/Status-Aktif-brightgreen)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-[Fitur](#-fitur) • [Cara Kerja](#-cara-kerja) • [Instalasi](#-instalasi-cepat) • [Contoh Perintah](#-contoh-perintah) • [Konfigurasi](#-konfigurasi) • [Keamanan](#-keamanan)
+[Features](#features) • [How It Works](#how-it-works) • [Installation](#quick-installation) • [Commands](#example-commands) • [Configuration](#configuration) • [Security](#security)
 
 </div>
 
 ---
 
-## ✨ Fitur
+## Features
 
-| | Kemampuan | Keterangan |
-|---|---|---|
-| 🗂️ | **Kelola folder dan file** | Cari folder dan file di semua drive, lihat isinya, buka, atau upload dari lokasi mana pun |
-| 👁️ | **Melihat layar** | Mengambil screenshot dan mengirimnya ke model agar agent tahu apa yang tampil |
-| 🖱️ | **Mouse dan keyboard** | Klik, double-klik, klik kanan, scroll, mengetik, dan menekan tombol |
-| 🌐 | **Otomasi browser** | Buka website, isi form, klik tombol, dan upload file memakai Playwright |
-| ▶️ | **YouTube instan** | Cari lalu putar video otomatis hanya dengan menyebut judulnya |
-| 🔁 | **Fallback model** | Lewat 9Router, otomatis pindah model jika satu provider kena limit |
-| ⚙️ | **Setup satu klik** | Satu file `.bat` memasang Node.js, dependensi, Chromium, dan 9Router |
-| ⬆️ | **Update otomatis + notifikasi** | Alamat update sudah bawaan. Versi baru diunduh sendiri, lengkap dengan pengumuman dan daftar perubahan |
-| 🛡️ | **Minta izin dulu** | Setiap aksi fisik (klik, ketik, buka, upload) menunggu persetujuan `y/n` |
+|   | Feature                        | Description                                                                                                                                        |
+| - | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | **Real Browser**               | Uses Chrome or Edge installed on the PC. Browser sessions and login state are preserved                                                            |
+|   | **Login Flow**                 | Use `/login` to open a login page and sign in manually. The agent does not handle passwords                                                        |
+|   | **YouTube Control**            | Search and play videos, skip ads when possible, switch results when playback fails, and control pause, next, seek, mute, and fullscreen            |
+|   | **Web Search**                 | Search the web and read information from the returned sources                                                                                      |
+|   | **File and Folder Management** | Search across drives, read and write text files, create folders, move files, zip and unzip archives, send files to Recycle Bin, and download files |
+|   | **Website Uploads**            | Upload files from different locations through the browser with `y/n` confirmation                                                                  |
+|   | **Screen Capture**             | Take screenshots and send them to the selected model for visual analysis                                                                           |
+|   | **Mouse and Keyboard**         | Click, double-click, right-click, scroll, type, and press keyboard shortcuts                                                                       |
+|   | **Windows Control**            | List, focus, and close windows, control media keys and volume, access clipboard data, and read system information                                  |
+|   | **User Interaction**           | Pause and wait when a login, CAPTCHA, or manual verification is required                                                                           |
+|   | **Model Fallback**             | Automatically switch to another model through 9Router when a provider reaches its limit                                                            |
+|   | **One-Click Setup**            | Install the required components from a single `.bat` file                                                                                          |
+|   | **Automatic Updates**          | Check for new releases, download updates, and show release information when the agent starts                                                       |
+|   | **Action Confirmation**        | Physical actions such as clicking, typing, opening, writing, deleting, and uploading require `y/n` confirmation by default                         |
 
 ---
 
-## 🧩 Cara Kerja
+## How It Works
 
 ```mermaid
 flowchart LR
-    U["Perintah teks"] --> A["Agent (agent.js)"]
-    A -->|"API kompatibel OpenAI"| R["9Router :20128"]
-    R --> M["Model AI: Kiro, Gemini, OpenCode, dll."]
+    U["Text Command"] --> A["Agent (agent.js)"]
+    A -->|"OpenAI-compatible API"| R["9Router :20128"]
+    R --> M["AI Models"]
     A --> B["Browser Playwright"]
-    A --> D["Desktop Windows: layar, mouse, keyboard, folder"]
+    A --> D["Windows Desktop"]
 ```
 
-1. Kamu mengetik perintah dengan bahasa biasa.
-2. Agent mengirim perintah ke model AI lewat 9Router, bersama daftar "alat" yang boleh dipakai.
-3. Model memilih alat (misalnya `find_folder`, `screenshot`, `click_screen`), agent menjalankannya, lalu hasilnya dikembalikan ke model.
-4. Langkah diulang sampai tugas selesai.
+1. Enter a command using normal language.
+2. The agent sends the command and available tools to the selected model through 9Router.
+3. The model selects the required tools, such as `find_folder`, `screenshot`, or `click_screen`.
+4. The agent executes the selected tools and returns their results to the model.
+5. The process continues until the requested task is completed.
+
+The user does not need to know or specify the tool names.
 
 ---
 
-## 🚀 Instalasi Cepat
+## Quick Installation
 
-**Prasyarat:** Windows 10 atau 11 dan koneksi internet. Selebihnya dipasang otomatis.
+**Requirements:** Windows 10 or 11 and an internet connection. The remaining components are installed automatically.
 
-1. Download [`start-agent.bat`](start-agent.bat) (klik **Download raw file** di pojok kanan atas halaman file).
-2. Taruh di folder mana saja, misalnya Desktop atau Downloads.
-3. Klik dua kali.
+1. Download [`start-agent.bat`](start-agent.bat).
+2. Place it in any folder, such as Desktop or Downloads.
+3. Double-click the file.
 
-Pada jalan pertama, skrip akan:
+On the first run, the launcher will:
 
-- membuat folder `Agent Automation` di sebelah file `.bat`
-- memasang **Node.js** (jika belum ada), dependensi npm, dan browser **Chromium**
-- memasang dan menjalankan **9Router**
-- meminta **API key** 9Router sekali saja lalu menyimpannya (dilewati jika owner menyediakan akses AI, lihat [Mode Owner](#-mode-owner-akses-ai-dibagikan))
+* create the `Agent Automation` folder next to the `.bat` file
+* install **Node.js** if it is not already available
+* install npm dependencies and **Chromium**
+* install and start **9Router**
+* request the **9Router API key** once and store it locally
+* skip the local 9Router setup when **Owner Mode** is configured
 
-Mulai jalan berikutnya, cukup klik dua kali dan agent langsung siap.
+On later runs, simply launch `start-agent.bat` again.
 
-> **Catatan:** hubungkan minimal satu provider di dashboard 9Router (`http://localhost:20128/dashboard`) dan buat combo bernama `bot-combo` dengan strategi **Fallback**.
+> **Note:** Connect at least one provider through the 9Router dashboard (`http://localhost:20128/dashboard`) and create a combo named `bot-combo` using the **Fallback** strategy.
 
 ---
 
-## 💬 Contoh Perintah
+## Example Commands
 
-Tulis dengan bahasa sehari-hari. Tidak perlu menyebut nama alat.
+Use normal language. Tool names do not need to be included.
 
 ```text
 Perintah> cari folder bernama Laporan lalu buka
+
 Perintah> aku pengen nonton youtube, cariin video weak hero
+
+Perintah> pause videonya, lalu naikin volume
+
+Perintah> cari tau cuaca besok di web
+
 Perintah> buka notepad, lalu ketik "catatan rapat hari ini"
+
 Perintah> ambil screenshot lalu jelaskan apa yang terlihat di layar
+
 Perintah> buka https://situs-tujuan.com/upload lalu upload file laporan.pdf
 ```
 
 ---
 
-## 🛠️ Alat yang Tersedia
+## Available Tools
 
 <details>
-<summary><b>Lihat daftar lengkap</b></summary>
+<summary><b>View complete list (39 tools)</b></summary>
 
-| Kelompok | Alat | Fungsi |
-|---|---|---|
-| Desktop | `find_folder`, `list_dir`, `open_path` | Mencari, melihat isi, dan membuka folder, file, atau aplikasi |
-| Desktop | `screenshot` | Mengambil gambar layar untuk dilihat model |
-| Desktop | `click_screen`, `scroll_screen` | Klik dan scroll berdasarkan koordinat screenshot |
-| Desktop | `type_desktop`, `press_keys` | Mengetik teks dan menekan kombinasi tombol |
-| Desktop | `wait` | Menunggu aplikasi atau halaman selesai dimuat |
-| Browser | `open_url`, `inspect_page`, `get_page_text` | Membuka dan membaca halaman web |
-| Browser | `type_text`, `click`, `upload_file` | Mengisi form, klik, dan upload file |
-| Browser | `youtube_play` | Mencari dan memutar video YouTube |
-| Umum | `list_files`, `done` | Melihat folder upload dan menandai tugas selesai |
+| Group                    | Tools                                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Browser                  | `open_url`, `inspect_page`, `get_page_text`, `type_text`, `click`, `upload_file`, `scroll_page`, `web_search`, `download_file`                                  |
+| YouTube                  | `youtube_play`, `youtube_control`                                                                                                                               |
+| Screen and Input         | `screenshot`, `click_screen`, `scroll_screen`, `type_desktop`, `press_keys`, `wait`                                                                             |
+| Windows and Applications | `list_windows`, `focus_window`, `close_window`, `open_path`                                                                                                     |
+| Files and Folders        | `find_folder`, `find_file`, `list_dir`, `list_files`, `read_text_file`, `write_text_file`, `make_folder`, `move_path`, `recycle_path`, `zip_path`, `unzip_path` |
+| PC                       | `media_key`, `clipboard_get`, `clipboard_set`, `system_info`, `now`                                                                                             |
+| Interaction              | `wait_for_user`, `done`                                                                                                                                         |
 
 </details>
 
 ---
 
-## ⚙️ Konfigurasi
+## Agent Commands
 
-Pengaturan disimpan otomatis di `config.bat` dalam folder `Agent Automation`.
+| Command            | Description                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `/login [address]` | Open a login page and let the user sign in manually. The browser session is saved |
+| `/baru`            | Show the latest feature list                                                      |
+| `/bantuan`         | Show available features and examples                                              |
+| `/update`          | Check for updates and restart the agent                                           |
+| `/versi`           | Show the current version and check for updates                                    |
+| `/reset`           | Clear the current conversation                                                    |
+| `exit`             | Exit the agent                                                                    |
 
-| Variabel | Default | Fungsi |
-|---|---|---|
-| `ROUTER_KEY` | (diisi saat setup) | API key dari 9Router |
-| `ROUTER_URL` | `http://localhost:20128/v1` | Alamat endpoint 9Router |
-| `ROUTER_MODEL` | `bot-combo` | Nama combo atau model yang dipakai |
-| `SAFE_DIR` | `upload-folder` | Folder default untuk nama file relatif. Bukan pembatas: upload bisa dari lokasi mana pun |
-| `AUTO_UPDATE` | `1` | `0` = matikan update otomatis dan notifikasinya |
-| `CONFIRM` | `1` | `1` = minta izin sebelum aksi fisik, `0` = otomatis penuh |
-| `SEARCH_ROOTS` | folder pengguna | Folder tambahan untuk pencarian, dipisah titik koma |
-| `UPDATE_URL` | (bawaan owner) | Ganti sumber update. Biasanya tidak perlu diisi |
+---
 
-**Perintah tambahan:**
+## Configuration
+
+Configuration is stored in `config.bat` inside the `Agent Automation` folder.
+
+| Variable       | Default                     | Description                                                                          |
+| -------------- | --------------------------- | ------------------------------------------------------------------------------------ |
+| `ROUTER_KEY`   | Set during setup            | 9Router API key                                                                      |
+| `ROUTER_URL`   | `http://localhost:20128/v1` | 9Router API endpoint                                                                 |
+| `ROUTER_MODEL` | `bot-combo`                 | Combo or model used by the agent                                                     |
+| `SAFE_DIR`     | `upload-folder`             | Default directory for relative file paths. Uploads are not restricted to this folder |
+| `AUTO_UPDATE`  | `1`                         | `0` = disable automatic updates and update notifications                             |
+| `CONFIRM`      | `1`                         | `1` = ask before physical actions, `0` = run automatically                           |
+| `SEARCH_ROOTS` | User folders                | Additional search locations separated by semicolons                                  |
+| `UPDATE_URL`   | Owner default               | Custom update source. Usually does not need to be changed                            |
+
+### Additional Commands
 
 ```cmd
-start-agent.bat reset     :: hapus key dan isi ulang
-start-agent.bat seturl    :: ganti alamat update (lanjutan)
+start-agent.bat reset     :: reset the stored API key
+start-agent.bat seturl    :: change the update source
 ```
 
 ---
 
-## ⬆️ Update Otomatis
+## Automatic Updates
 
-Alamat update **sudah tertanam** di `start-agent.bat`. User tidak perlu memasukkan URL apa pun.
+The update source is already configured in `start-agent.bat`. Users do not need to enter an update URL manually.
 
-| Kapan | Yang terjadi |
-|---|---|
-| Setiap `start-agent.bat` dijalankan | Versi dicek. Jika ada yang baru, file diunduh otomatis, `npm install` dijalankan bila perlu, lalu **daftar perubahan** ditampilkan |
-| Saat agent sedang berjalan | Dicek tiap 15 menit. Jika ada versi baru muncul pemberitahuan `*** UPDATE TERSEDIA ***` |
-| User mengetik `/update` | Agent menutup dirinya, memperbarui, dan menyala lagi otomatis |
-| Owner menulis `notice.txt` | **Pengumuman** tampil di layar semua user setiap kali agent dijalankan |
+| When                           | What happens                                                                                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Every `start-agent.bat` launch | Checks the version. If a newer version exists, files are downloaded, dependencies are updated when required, and the changelog is displayed |
+| While the agent is running     | Checks for updates every 15 minutes and displays an update notification when a new version is available                                     |
+| `/update` is entered           | The agent closes, updates itself, and starts again                                                                                          |
+| `notice.txt` is published      | The notice is displayed to users when the agent starts                                                                                      |
 
-Jika internet mati atau unduhan gagal, agent tetap jalan dengan versi lokal dan mencoba lagi lain kali. User yang tidak mau update otomatis cukup menulis `AUTO_UPDATE=0` di `config.bat`.
+If the internet connection is unavailable or an update fails, the current local version continues running and the update will be checked again later.
 
-### Untuk Owner: merilis versi baru
+To disable automatic updates:
 
-1. Ganti `agent.js` di repo ini (**Add file → Upload files**).
-2. Naikkan angka di `version.txt` (misalnya `3` menjadi `4`). **Angka inilah yang memicu update ke semua user.**
-3. (Opsional) Tulis perubahannya di `changelog.txt`. Isinya tampil ke user setelah update.
-4. (Opsional) Tulis pengumuman di `notice.txt`. Kosongkan lagi jika sudah tidak perlu.
-5. **Commit changes.** GitHub kadang menyimpan cache hingga sekitar 5 menit.
+```text
+AUTO_UPDATE=0
+```
 
-Untuk menambah file baru ke update, tambahkan namanya ke `files.txt` (satu nama per baris, tanpa folder). `config.bat` dan `start-agent.bat` sengaja tidak bisa ditimpa oleh update.
+Add this to `config.bat`.
+
+### Releasing a New Version
+
+1. Replace `agent.js` in the repository.
+2. Increase the number in `version.txt`. This number triggers the update for users.
+3. Optionally update `changelog.txt` with the changes.
+4. Optionally add an announcement to `notice.txt`.
+5. Commit the changes to the repository.
+
+To add another file to the update process, add its filename to `files.txt`, one file per line.
+
+`config.bat` and `start-agent.bat` are intentionally excluded from automatic replacement.
 
 ---
 
-## 🔑 Mode Owner: akses AI dibagikan
+## Owner Mode
 
-Secara bawaan setiap user memakai 9Router di PC-nya sendiri dan memasukkan key sendiri. Jika owner ingin user **tidak perlu memasang 9Router dan tidak perlu memasukkan key**, owner menjalankan satu server 9Router yang bisa diakses internet, lalu mengisi dua baris di bagian atas `start-agent.bat` sebelum membagikannya:
+By default, every user runs their own 9Router instance and provides their own API key.
+
+For shared access, the owner can host a 9Router server and configure `start-agent.bat` before distributing it:
 
 ```bat
 set "OWNER_ROUTER_URL=https://ai.domainmu.com/v1"
 set "OWNER_ROUTER_KEY=sk-key-untuk-user"
 ```
 
-Dengan itu `start-agent.bat` melewati pemasangan 9Router dan langsung memakai server owner.
+With these values configured, the launcher skips the local 9Router installation and uses the owner's server instead.
 
-> ⚠️ **Jangan pernah menaruh key di repo GitHub publik.** Isi hanya di file `start-agent.bat` yang dibagikan langsung ke user. Key lokal `localhost` milik satu PC tidak berlaku di PC lain, jadi mode ini membutuhkan server bersama.
->
-> ⚠️ **Amankan server.** Ganti password dashboard 9Router, jangan membuka dashboard ke internet (cukup jalur `/v1`), gunakan key terpisah per user supaya bisa dicabut satu per satu, dan pantau pemakaian.
->
-> ⚠️ **Transparansi ke user:** perintah dan screenshot layar user melewati server owner. Beri tahu user soal ini. Pastikan juga penggunaan akun/provider yang dibagikan sesuai ketentuan layanan masing-masing.
+> **Security:** Never publish the owner key in a public GitHub repository. Only distribute it through a controlled copy of `start-agent.bat`.
+
+> **Server security:** Protect the 9Router server, change the dashboard password, avoid exposing the dashboard publicly, use separate keys when possible, and monitor usage.
+
+> **Privacy:** Commands and screenshots can pass through the owner's server. Users should be informed before using Owner Mode.
+
+> **Provider terms:** Shared model access must comply with the terms of the provider and the services connected to 9Router.
 
 ---
 
-## 📁 Struktur Repo
+## Repository Structure
 
 ```text
 .
-├── start-agent.bat   # Installer + launcher (klik dua kali)
-├── agent.js          # Program agent
-├── package.json      # Dependensi
-├── version.txt       # Nomor versi (angka yang berubah = memicu update)
-├── files.txt         # Daftar file yang diunduh saat update
-├── changelog.txt     # Daftar perubahan, tampil ke user setelah update
-├── notice.txt        # Pengumuman owner, tampil ke semua user
-└── README.md
+├── start-agent.bat   # Installer and launcher
+├── agent.js          # Main agent
+├── package.json      # Dependencies
+├── version.txt       # Version number used for updates
+├── files.txt         # Files included in automatic updates
+├── changelog.txt     # Changes shown after an update
+├── notice.txt        # Owner announcements
+└── README.md         # Project documentation
 ```
 
 ---
 
-## 🔐 Keamanan
+## Security
 
-Agent ini punya kontrol luas atas PC. Pakai dengan sadar.
+This agent has broad access to the local computer. Use it only in an environment you trust.
 
-- ✅ **Izin `y/n`** aktif secara default untuk setiap klik, ketikan, pembukaan file, dan upload.
-- ✅ **Tidak ada alat untuk menjalankan perintah shell bebas.**
-- ✅ **Berhenti kapan saja** dengan menekan `Ctrl + C`.
-- ⚠️ **Screenshot dikirim ke penyedia model** yang kamu pilih. Jangan jalankan agent saat layar menampilkan password, internet banking, atau percakapan pribadi.
-- ⚠️ **API key tersimpan sebagai teks biasa** di `config.bat`. Jangan membagikan folder `Agent Automation`.
-- ⚠️ **Siapa pun yang bisa mengubah repo sumber update bisa mengubah kode yang berjalan di PC-mu.** Aktifkan verifikasi dua langkah (2FA) di akun GitHub dan hanya pakai repo milikmu sendiri.
-- ⚠️ Beberapa jalur gratis di 9Router tidak resmi dan bisa melanggar ketentuan penyedianya. Periksa sebelum dipakai untuk keperluan bisnis.
-
----
-
-## 🩺 Pemecahan Masalah
-
-| Masalah | Solusi |
-|---|---|
-| `Node.js belum terbaca` setelah instalasi | Tutup jendela, lalu klik dua kali `start-agent.bat` lagi |
-| `Akses ditolak oleh server owner` | Key dicabut atau salah. Minta `start-agent.bat` baru dari owner |
-| `Key ditolak oleh 9Router` | Jalankan `start-agent.bat reset` dan masukkan key yang benar |
-| Agent hanya menulis rencana, tidak bertindak | Letakkan model yang kuat dan mendukung tool calling di urutan teratas combo |
-| Klik meleset dari target | Pastikan model punya kemampuan melihat gambar (vision), lalu minta agent mengambil screenshot ulang |
-| `9Router belum merespons` | Buka `http://localhost:20128/dashboard` secara manual dan cek apakah berjalan |
+* **Action confirmation** is enabled by default for clicking, typing, opening files, writing, deleting, and uploading.
+* **No unrestricted shell execution tool** is provided.
+* The agent can be stopped at any time with `Ctrl + C`.
+* **Screenshots may be sent to the selected model provider.** Do not run the agent while passwords, banking information, private conversations, or other sensitive data are visible.
+* **The API key is stored as plain text** in `config.bat`. Do not share the `Agent Automation` folder or commit the configuration to a public repository.
+* **The update source can change the code executed on the PC.** Use a repository controlled by the owner and enable two-factor authentication on the GitHub account.
+* **Third-party providers may have their own restrictions.** Review their terms before using the project for commercial or production workloads.
 
 ---
 
-## ⚠️ Disclaimer
+## Troubleshooting
 
-Proyek ini disediakan apa adanya, tanpa jaminan apa pun. Kamu bertanggung jawab atas semua aksi yang dijalankan agent di komputermu dan atas kepatuhan terhadap ketentuan layanan penyedia model yang dipakai.
+| Problem                                      | Solution                                                                                         |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `Node.js` is not detected after installation | Close the current window and run `start-agent.bat` again                                         |
+| `Access denied by owner server`              | The key may have been revoked or is invalid. Request an updated `start-agent.bat` from the owner |
+| `9Router rejected the API key`               | Run `start-agent.bat reset` and enter a valid key                                                |
+| Agent only generates a plan                  | Use a model with tool-calling support and place it near the top of the combo                     |
+| Screen clicks are inaccurate                 | Use a vision-capable model and ask the agent to capture a new screenshot                         |
+| `9Router is not responding`                  | Open `http://localhost:20128/dashboard` and check whether the service is running                 |
+
+---
+
+## Disclaimer
+
+This project is provided as-is without warranty.
+
+You are responsible for all actions performed by the agent on your computer, the configuration of connected services, API usage, and compliance with the terms of service of the model providers and third-party services you use.
 
 <div align="center">
 
-Dibuat dengan 🧠 [9Router](https://github.com/decolua/9router) + 🎭 [Playwright](https://playwright.dev)
+Built with [9Router](https://github.com/decolua/9router) and [Playwright](https://playwright.dev)
 
 </div>
