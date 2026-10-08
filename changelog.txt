@@ -1,0 +1,17 @@
+Versi 7
+- JALUR CEPAT: perintah umum (putar lagu, volume, buka situs/folder, upload, pause/next, timer, dll) langsung dijalankan TANPA menunggu AI. Hasil dalam hitungan detik.
+- UPLOAD CEPAT: satu langkah, otomatis menemukan tombol upload, banyak file atau satu folder (di-zip), menunggu selesai, dan menampilkan link.
+- YouTube lebih cepat: pencarian tanpa memuat halaman hasil dan jeda diperpendek.
+- AI lebih ringan: hanya alat yang relevan dikirim, alat baca-saja berjalan bersamaan, /tes memilih model TERCEPAT.
+- Alat baru: set_volume, speak, set_timer, save_screenshot, copy_path, recent_files, search_text.
+- Setiap tugas menampilkan lama selesainya. Ketik /fast off untuk mematikan jalur cepat.
+
+Versi 6
+- Koneksi 9Router tahan banting, /tes dan /model untuk memilih model.
+
+Versi 5
+- Banyak tab dan upload banyak file.
+
+Versi 4
+- Chrome/Edge asli, login lewat /login, YouTube, alat PC dan file.
+Ketik /bantuan untuk daftar lengkap.
