@@ -1,8 +1,0 @@
-Versi 4
-- Browser memakai Chrome/Edge asli: video YouTube tidak error lagi dan login Google bisa dilakukan.
-- Login sekali lewat /login, sesi tersimpan untuk seterusnya.
-- YouTube: skip iklan otomatis, pindah ke hasil lain jika error, kontrol pause/next/maju/mundur/mute/fullscreen.
-- Cari di web, unduh file, baca dan tulis file teks, zip dan unzip, pindah dan hapus ke Recycle Bin.
-- Kontrol PC: volume dan tombol media, info sistem, clipboard, daftar dan fokus jendela.
-- Agent berhenti dan minta bantuanmu saat butuh login, captcha, atau verifikasi.
-- Daftar fitur baru tampil otomatis setelah update. Ketik /bantuan untuk daftar lengkap.
