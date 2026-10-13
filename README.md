@@ -97,24 +97,50 @@ The user does not need to know or specify the tool names.
 
 ## Quick Installation
 
-Requirements: Windows 10 or 11 and an internet connection. The remaining components are installed automatically.
+**Requirements:** Windows 10 or 11 and an internet connection. Git is **not** required. Everything else is installed automatically.
 
-1. Download [`start-agent.bat`](start-agent.bat).
-2. Place it in any folder, such as Desktop or Downloads.
-3. Double-click the file.
+### Method 1: One-Line CMD Installation (Recommended)
 
-On the first run, the launcher will:
+Open CMD, paste the following command, and press Enter:
 
-* create the `Agent Automation` folder next to the `.bat` file
-* install Node.js if it is not already available
-* install npm dependencies and Chromium
-* install and start 9Router
-* request the 9Router API key once and store it locally
-* skip the local 9Router setup when Owner Mode is configured
+```cmd
+curl -fsSL --ssl-no-revoke -o "%TEMP%\aw.bat" https://raw.githubusercontent.com/unkownBrown/AgentAutomation/main/start-agent.bat && "%TEMP%\aw.bat"
+```
 
-On later runs, simply launch `start-agent.bat` again.
+This downloads the installer and runs it. Once installation is complete, open a **new CMD window** and simply type **`AgentWrzy`**.
 
-> Note: Connect at least one provider through the 9Router dashboard (`http://localhost:20128/dashboard`) and create a combo named `bot-combo` using the Fallback strategy.
+If you use **PowerShell** instead of CMD, run this version:
+
+```powershell
+curl.exe -fsSL --ssl-no-revoke -o "$env:TEMP\aw.bat" https://raw.githubusercontent.com/unkownBrown/AgentAutomation/main/start-agent.bat; & "$env:TEMP\aw.bat"
+```
+
+### Method 2: Install Using Git (Alternative)
+
+```cmd
+winget install --id Git.Git -e
+git clone https://github.com/unkownBrown/AgentAutomation "%USERPROFILE%\AgentWrzy-src"
+"%USERPROFILE%\AgentWrzy-src\start-agent.bat"
+```
+
+The result is the same. Git is only used to obtain the initial files; subsequent updates are handled by the agent automatically.
+
+### Method 3: Manual Download
+
+Download [`start-agent.bat`](start-agent.bat) using **Download raw file**, save it anywhere on your computer, and double-click it.
+
+### What the Installer Does
+
+During setup, the installer will:
+
+- Create the working directory at **`%USERPROFILE%\AgentWrzy`**. Browser logins, settings, and memory are stored here. If the old `Agent Automation` folder already exists, it will continue to be used.
+- Install **Node.js** if it is not already installed, along with npm dependencies and **9Router**.
+- Add the **`AgentWrzy`** command to PATH.
+- Request your **9Router API key** once, unless the owner has provided shared access (see [Owner Mode](#owner-mode)).
+
+After installation, simply type `AgentWrzy` in a new terminal to launch the agent. Updates are downloaded automatically from GitHub.
+
+> **Note:** Connect at least one provider through the 9Router dashboard (`http://localhost:20128/dashboard`) and create a combo named `bot-combo` using the **Fallback** strategy.
 
 ---
 
@@ -123,19 +149,19 @@ On later runs, simply launch `start-agent.bat` again.
 Use normal language. Tool names do not need to be included.
 
 ```text
-Perintah> cari folder bernama Laporan lalu buka
+Command> find a folder named Reports and open it
 
-Perintah> aku pengen nonton youtube, cariin video weak hero
+Command> open YouTube and find a Weak Hero video
 
-Perintah> pause videonya, lalu naikin volume
+Command> pause the video, then increase the volume
 
-Perintah> cari tau cuaca besok di web
+Command> search the web for tomorrow's weather
 
-Perintah> buka notepad, lalu ketik "catatan rapat hari ini"
+Command> open Notepad and type "today's meeting notes"
 
-Perintah> ambil screenshot lalu jelaskan apa yang terlihat di layar
+Command> take a screenshot and describe what is visible on the screen
 
-Perintah> buka https://situs-tujuan.com/upload lalu upload file laporan.pdf
+Command> open https://example.com/upload and upload report.pdf
 ```
 
 ---
