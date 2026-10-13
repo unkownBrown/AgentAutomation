@@ -13,11 +13,48 @@ Uses [9Router](https://github.com/decolua/9router) as the LLM gateway with model
 ![Router](https://img.shields.io/badge/LLM%20Gateway-9Router-FF6B35)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-[Features](#features) • [How It Works](#how-it-works) • [Installation](#quick-installation) • [Commands](#example-commands) • [Configuration](#configuration) • [Security](#security)
+[Showcase](#showcase) • [Features](#features) • [How It Works](#how-it-works) • [Installation](#quick-installation) • [Commands](#example-commands) • [Configuration](#configuration) • [Security](#security)
 
 </div>
 
 ---
+
+---
+
+## Showcase
+
+A look at Agent Automation in action, from model testing and the command interface to terminal conversations.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <strong>Model Testing</strong><br>
+      <img src="assets/showcase/test-model.gif" alt="Agent Automation model testing demo" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <strong>Agent Menu</strong><br>
+      <img src="assets/showcase/menu.gif" alt="Agent Automation menu demo" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <strong>Natural-Language Commands</strong><br>
+      <img src="assets/showcase/command-agent.gif" alt="Agent Automation command demo" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <strong>Terminal Chat</strong><br>
+      <img src="assets/showcase/terminal-chat.gif" alt="Agent Automation terminal chat demo" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <strong>Terminal Chat — Additional Demo</strong><br>
+      <img src="assets/showcase/terminal-chat-2.gif" alt="Agent Automation additional terminal chat demo" width="80%">
+    </td>
+  </tr>
+</table>
+
+> These previews are animated GIFs generated from the project demo recordings so they can play directly in the GitHub README. Keep the GIF files in `assets/showcase/` when uploading the README.
 
 ## Features
 
