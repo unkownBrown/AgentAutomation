@@ -1,0 +1,12 @@
+[ID]
+Versi 13
+- BARU: build_project — agent bisa BIKIN APLIKASI/PROJECT SUNGGUHAN (banyak file nyata di disk, bukan cuma deskripsi), lalu bisa langsung dijalankan. Contoh: "buatkan aplikasi todo list html".
+- Satu panggilan AI khusus merancang seluruh file project sekaligus (bukan model utama menulis file satu-satu di tengah obrolan), hasilnya lebih lengkap dan konsisten.
+- Path file yang mencurigakan (naik folder, drive lain, path absolut) otomatis ditolak sebelum ditulis ke disk.
+- Versi 12: pahami aplikasi/website (inspect_app, inspect_site), makro buatan sendiri, /doctor, /bagikan.
+[EN]
+Version 13
+- NEW: build_project — the agent can BUILD A REAL APP/PROJECT (actual multi-file output on disk, not just a description), then run it. Example: "build me a to-do list web app".
+- One dedicated AI call designs the whole project's files at once (instead of the main model writing files one by one mid-conversation), giving more complete, consistent results.
+- Suspicious file paths (directory traversal, other drives, absolute paths) are automatically rejected before anything is written to disk.
+- Version 12: understand apps/websites (inspect_app, inspect_site), your own macros, /doctor, /bagikan.
